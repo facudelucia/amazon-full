@@ -11,7 +11,7 @@ import Payment from './Payment';
 import {loadStripe} from "@stripe/stripe-js"
 import {Elements} from "@stripe/react-stripe-js"
 import Orders from './Orders';
-const promise = loadStripe("pk_test_51HTfqYCBzNNFVvGbHFmadSN0PusWyLEC9pTdg3Dv8PtQKUkvoRGHxeQkQYntQDxmA17jkT62tpF62huzUoFzHUzY00enuttkyb")
+const promise = loadStripe("")
 function App() {
   const[{}, dispatch]= useStateValue()
   useEffect(() => {
