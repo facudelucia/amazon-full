@@ -1,21 +1,27 @@
+import { v4 as uuid } from 'uuid'
+
 export const initialState = {
     basket: [],
-    user:null
+    user: {
+        uid: uuid(),
+        email: 'email@email.com'
+    },
+    orders: []
 }
 
 export const getBasketTotal = (basket) =>
-    basket?.reduce((amount, item)=>item.price + amount, 0)
+    basket?.reduce((amount, item) => item.price + amount, 0)
 
-const reducer = (state, action) =>{
-    
-    switch(action.type){
+const reducer = (state, action) => {
+
+    switch (action.type) {
         case "ADD_TO_BASKET":
-            return{
+            return {
                 ...state,
-                basket :[...state.basket, action.item]
+                basket: [...state.basket, action.item]
             }
         case "EMPTY_BASKET":
-            return{
+            return {
                 ...state,
                 basket: []
             }
@@ -25,22 +31,22 @@ const reducer = (state, action) =>{
             )
             let newBasket = [...state.basket]
 
-            if(index >= 0){
+            if (index >= 0) {
                 newBasket.splice(index, 1)
-            }else{
+            } else {
                 console.warn(`Cant remove product (id: ${action.id}) as its not in basket!`)
             }
             return {
                 ...state,
                 basket: newBasket
             }
-        case "SET_USER":
-            return{
+        case "CREATE_ORDER":
+            return {
                 ...state,
-                user: action.user
+                orders: [...state.orders, action.order]
             }
         default:
-        return state
+            return state
     }
 }
 export default reducer
